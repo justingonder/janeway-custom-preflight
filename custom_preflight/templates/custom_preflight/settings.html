@@ -1,0 +1,13 @@
+{% extends "admin/core/base.html" %}
+{% load foundation %}
+
+{% block title %}Custom Preflight Settings{% endblock title %}
+{% block title-section %}Custom Preflight Settings{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form|foundation }}
+        <button type="submit" class="button">Save</button>
+    </form>
+{% endblock %}

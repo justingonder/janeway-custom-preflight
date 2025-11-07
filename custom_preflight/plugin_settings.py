@@ -2,7 +2,7 @@ from django import forms
 
 from core import models
 from utils.install import update_settings_from_plugin
-from repository.models import RepositorySetting
+from core.models import SettingValue
 
 PLUGIN_SETTINGS = [
     {
@@ -120,7 +120,7 @@ class CustomPreflightSettingsForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for setting in CUSTOM_PREFLIGHT_SETTINGS:
-            self.fields[setting['name']].initial = RepositorySetting.get_setting(
+            self.fields[setting['name']].initial = SettingValue.get_setting(
                 'custom_preflight',
                 setting['name'],
                 setting['default'],
@@ -128,7 +128,7 @@ class CustomPreflightSettingsForm(forms.Form):
 
     def save(self):
         for setting in CUSTOM_PREFLIGHT_SETTINGS:
-            RepositorySetting.set_setting(
+            SettingValue.set_setting(
                 'custom_preflight',
                 setting['name'],
                 self.cleaned_data[setting['name']],

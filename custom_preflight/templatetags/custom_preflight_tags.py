@@ -1,5 +1,5 @@
 from django import template
-from repository.models import RepositorySetting
+from core.models import SettingValue
 
 register = template.Library()
 
@@ -10,7 +10,7 @@ def custom_preflight_settings():
     settings = {}
     for setting in plugin_settings.CUSTOM_PREFLIGHT_SETTINGS:
         settings[setting['name']] = {
-            'value': RepositorySetting.get_setting(
+            'value': SettingValue.get_setting(
                 'custom_preflight',
                 setting['name'],
                 setting['default'],
